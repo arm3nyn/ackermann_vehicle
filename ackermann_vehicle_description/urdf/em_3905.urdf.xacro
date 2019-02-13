@@ -37,6 +37,10 @@ limitations under the License.
 -->
 
 <robot name="em_3905" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- includes -->
+  <xacro:include filename="$(find ackermann_vehicle_description)/urdf/stereo_camera.urdf.xacro" />
+
   <!-- Degree-to-radian conversions -->
   <xacro:property name="degrees_45" value="0.785398163"/>
   <xacro:property name="degrees_90" value="1.57079633"/>
@@ -45,7 +49,7 @@ limitations under the License.
        along the y axis, and chassis_height along the z axis. -->
   <xacro:property name="chassis_length" value="0.258"/>
   <xacro:property name="chassis_width" value="0.168"/>
-  <xacro:property name="chassis_height" value="0.01"/>
+  <xacro:property name="chassis_height" value="0.02"/>
   <xacro:property name="chassis_mass" value="2.788"/>
 
   <!-- battery_dist is the distance between the inner edges of the
@@ -342,17 +346,7 @@ limitations under the License.
 
   <!-- base_link must have geometry so that its axes can be displayed in
        rviz. -->
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <box size="0.01 0.01 0.01"/>
-      </geometry>
-      <material name="chassis_mat"/>
-    </visual>
-  </link>
-  <gazebo reference="base_link">
-    <material>Gazebo/Grey</material>
-  </gazebo>
+  <link name="base_link" />
 
   <!-- Chassis -->
   <link name="chassis">
@@ -378,7 +372,7 @@ limitations under the License.
     </xacro:solid_cuboid_inertial>
   </link>
   <gazebo reference="chassis">
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <joint name="base_link_to_chasis" type="fixed">
@@ -400,13 +394,37 @@ limitations under the License.
   <xacro:rear_wheel lr_prefix="right" fr_prefix="rear"
                     lr_reflect="-1" fr_reflect="-1"/>
 
+  <!-- camera mount -->
+  <link name="camera_mount">
+    <visual>
+      <geometry>
+        <cylinder radius="0.02" length="0.1" />
+      </geometry>
+      <material name="">
+      </material>
+    </visual>
+  </link>
+  <gazebo reference="camera_mount">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <joint name="camera_mount_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="camera_mount" />
+    <origin xyz="0.1 0.0 0.05" rpy="0 0 0" />
+  </joint>
+
+  <!-- camera -->
+  <xacro:stereo_camera parent="camera_mount" origin="0 0 0.06" />
+
+  <!-- gazebo plugins for control and odometry ground truth-->
   <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <!-- As of 10/7/13, setting controlPeriod to a value greater than
-           Gazebo's simulation period prevents the shock absorbers from
-           working.
-      <controlPeriod>${ctrl_period}</controlPeriod>
-      -->
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />
+    <plugin name="gazebo_ros_p3d"     filename="libgazebo_ros_p3d.so">
+      <frameName>map</frameName>
+      <bodyName>base_link</bodyName>
+      <topicName>odom_truth</topicName>
+      <updateRate>30.0</updateRate>
     </plugin>
   </gazebo>
+
 </robot>
