@@ -175,7 +175,7 @@ class _AckermannCtrlr(object):
                                   "not be used.")
                     continue
 
-                pub = rospy.Publisher(ctrlr_name + "/command", Float64,
+                pub = rospy.Publisher(ctrlr_name + "/command", Float64, queue_size=10,
                                       latch=True)
                 _wait_for_ctrlr(list_ctrlrs, ctrlr_name)
                 pub.publish(eq_pos)
@@ -484,7 +484,7 @@ def _create_axle_cmd_pub(list_ctrlrs, axle_ctrlr_name):
 def _create_cmd_pub(list_ctrlrs, ctrlr_name):
     # Create a command publisher.
     _wait_for_ctrlr(list_ctrlrs, ctrlr_name)
-    return rospy.Publisher(ctrlr_name + "/command", Float64)
+    return rospy.Publisher(ctrlr_name + "/command", Float64, queue_size=10)
 
 
 def _get_steer_ang(phi):
