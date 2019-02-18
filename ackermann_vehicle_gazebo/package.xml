@@ -47,5 +47,6 @@
   <export>
     <architecture_independent/>
     <rosdoc config="rosdoc.yaml"/>
+    <gazebo_ros gazebo_media_path="${prefix}" gazebo_model_path="${prefix}/models" gazebo_world_path="${prefix}/world"/>
   </export>
 </package>
