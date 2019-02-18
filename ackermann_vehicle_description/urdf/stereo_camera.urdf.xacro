@@ -105,8 +105,8 @@
             <format>R8G8B8</format>
           </image>
           <clip>
-            <near>0.5</near>
-            <far>20</far>
+            <near>0.05</near>
+            <far>30</far>
           </clip>
           <distortion>
             <k1>-0.25</k1>
@@ -126,8 +126,8 @@
             <format>R8G8B8</format>
           </image>
           <clip>
-            <near>0.5</near>
-            <far>20</far>
+            <near>0.05</near>
+            <far>30</far>
           </clip>
           <distortion>
             <k1>-0.25</k1>
@@ -142,16 +142,16 @@
           <alwaysOn>true</alwaysOn>
           <updateRate>15.0</updateRate>
           <cameraName>stereo_camera</cameraName>
-          <imageTopicName>image_rect_color</imageTopicName>
+          <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
           <frameName>stereo_left_camera_frame</frameName>
           <rightFrameName>stereo_right_camera_frame</rightFrameName>
           <hackBaseline>0.12</hackBaseline>
-          <distortionK1>0.0</distortionK1>
-          <distortionK2>0.0</distortionK2>
+          <distortionK1>-0.25</distortionK1>
+          <distortionK2>0.12</distortionK2>
           <distortionK3>0.0</distortionK3>
-          <distortionT1>0.0</distortionT1>
-          <distortionT2>0.0</distortionT2>
+          <distortionT1>0.00028</distortionT1>
+          <distortionT2>0.00005</distortionT2>
         </plugin>
       </sensor>
     </gazebo>
