@@ -76,5 +76,11 @@ limitations under the License.
       <param name="cmd_timeout" value="$(arg cmd_timeout)"/>
       <rosparam file="$(find ackermann_vehicle_gazebo)/config/em_3905_ackermann_ctrlr_params.yaml" command="load"/>
     </node>
+
+
+    <!-- launch camera calibrator if checkerboard world is selected -->
+    <include if="$(eval world=='checkerboard')" file="$(find ackermann_vehicle_gazebo)/launch/stereo_camera_calibration.launch" />
+
   </group>
+
 </launch>
