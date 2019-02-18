@@ -36,23 +36,28 @@ limitations under the License.
 -->
 
 <launch>
-  <arg name="namespace" default="ackermann_vehicle"/>
-  <arg name="world" default="empty" doc="worlds: [empty, warehouse, checkerboard]"/>
+
+  <arg name="namespace"   default="ackermann_vehicle"/>
+  <arg name="world"       default="empty" doc="worlds: [empty, warehouse, checkerboard]"/>
   <arg name="cmd_timeout" default="0.5"/>
+  <arg name="rectify"     default="true" />
+  <arg name="stereo_view" default="false" />
 
   <!-- Vehicle pose -->
-  <arg name="x" default="0.0"/>
-  <arg name="y" default="0.0"/>
-  <arg name="z" default="0.1"/>
-  <arg name="roll" default="0.0"/>
-  <arg name="pitch" default="0.0"/>
-  <arg name="yaw" default="0.0"/>
+  <arg name="x"           default="0.0"/>
+  <arg name="y"           default="0.0"/>
+  <arg name="z"           default="0.1"/>
+  <arg name="roll"        default="0.0"/>
+  <arg name="pitch"       default="0.0"/>
+  <arg name="yaw"         default="0.0"/>
 
+  <!-- load robot description -->
   <include file="$(find ackermann_vehicle_description)/launch/ackermann_vehicle.launch">
     <arg name="namespace" value="$(arg namespace)"/>
   </include>
 
   <group ns="$(arg namespace)">
+
     <!-- Create the world. -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
       <arg name="world_name" value="$(find ackermann_vehicle_gazebo)/worlds/$(arg world).world"/>
@@ -77,6 +82,12 @@ limitations under the License.
       <rosparam file="$(find ackermann_vehicle_gazebo)/config/em_3905_ackermann_ctrlr_params.yaml" command="load"/>
     </node>
 
+    <!-- launch stereo image proc pipeline for rectification -->
+    <group if="$(arg rectify)">
+      <node name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc" ns="stereo_camera" />
+      <node name="stereo_view" pkg="image_view" type="stereo_view" output="screen"
+            args="stereo:=stereo_camera image:=/image_rect_color" if="$(arg stereo_view)"/>
+    </group>
 
     <!-- launch camera calibrator if checkerboard world is selected -->
     <include if="$(eval world=='checkerboard')" file="$(find ackermann_vehicle_gazebo)/launch/stereo_camera_calibration.launch" />
