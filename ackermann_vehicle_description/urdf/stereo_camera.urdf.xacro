@@ -147,11 +147,16 @@
           <frameName>stereo_left_camera_frame</frameName>
           <rightFrameName>stereo_right_camera_frame</rightFrameName>
           <hackBaseline>0.12</hackBaseline>
-          <distortionK1>-0.25</distortionK1>
-          <distortionK2>0.12</distortionK2>
+          <!-- <distortionK1>-0.066412</distortionK1> -->
+          <!-- <distortionK2>0.008609</distortionK2> -->
+          <!-- <distortionK3>0.0</distortionK3> -->
+          <!-- <distortionT1>-0.00012</distortionT1> -->
+          <!-- <distortionT2>-0.000814</distortionT2> -->
+          <distortionK1>-0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
           <distortionK3>0.0</distortionK3>
-          <distortionT1>0.00028</distortionT1>
-          <distortionT2>0.00005</distortionT2>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
         </plugin>
       </sensor>
     </gazebo>
