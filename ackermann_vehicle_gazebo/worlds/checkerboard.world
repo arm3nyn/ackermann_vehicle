@@ -34,10 +34,9 @@
 
    <model name="checkerboard">
       <static>true</static>
-      <pose frame="">4 0 0.5 0 -1.5 0</pose>
+      <pose frame="">2 0 0.5 0 -1.5 0</pose>
       <link name="checkerboard_link">
         <visual name="checkerboard_visual">
-          <cast_shadows>true</cast_shadows>
           <geometry>
             <mesh>
               <uri>file://models/checkerboard/checkerboard.dae</uri>
@@ -49,8 +48,8 @@
     </model>
 
     <scene>
-      <ambient>0.4 0.4 0.4 1</ambient>
-      <background>0.7 0.7 0.7 1</background>
+      <ambient>1 1 1 1</ambient>
+      <background>0.3 0.3 0.3 1</background>
       <shadows>true</shadows>
     </scene>
 

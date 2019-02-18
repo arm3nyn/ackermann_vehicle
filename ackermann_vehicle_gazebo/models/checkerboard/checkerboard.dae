@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2019-02-18T10:13:41</created>
-    <modified>2019-02-18T10:13:41</modified>
+    <created>2019-02-18T15:50:57</created>
+    <modified>2019-02-18T15:50:57</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -125,7 +125,7 @@
               <texture texture="checkerboard_png-sampler" texcoord="checkerboard_png"/>
             </diffuse>
             <specular>
-              <color sid="specular">0 0 0 1</color>
+              <color sid="specular">1 1 1 1</color>
             </specular>
           </phong>
         </technique>
