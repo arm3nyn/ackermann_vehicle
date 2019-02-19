@@ -35,7 +35,7 @@
    <model name="warehouse">
       <static>true</static>
       <link name="warehouse_link">
-        <pose>0 0 0 0 0 0</pose>
+        <pose>10 -8 0.1 0 0 3.141592654</pose>
         <visual name="warehouse_visual">
           <cast_shadows>true</cast_shadows>
           <geometry>
@@ -45,11 +45,19 @@
             </mesh>
           </geometry>
         </visual>
+        <collision name="warehouse_collision">
+          <geometry>
+            <mesh>
+              <uri>file://models/warehouse/warehouse.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
       </link>
     </model>
 
     <scene>
-      <ambient>0.4 0.4 0.4 1</ambient>
+      <ambient>1 1 1 1</ambient>
       <background>0.7 0.7 0.7 1</background>
       <shadows>true</shadows>
     </scene>
